@@ -4,12 +4,13 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
+import JobDisplay from './job-display';
 
-function AddJob(){
+function AddJob({ submitJob }){
 
     const [jobNumber, setJobNumber] = useState('');
     const [screens, setScreens] = useState('');
-    const [firmDate, setFirmDate] = useState(false);
+    const [firmDate, setFirmDate] = useState('');
     const [dueDate, setDueDate] = useState('');
     const [customerName, setCustomerName] = useState('');
     const [description, setDescription] = useState('');
@@ -18,12 +19,18 @@ function AddJob(){
         event.preventDefault();
 
         console.log("button was clicked");
-        console.log(jobNumber);
-        console.log(screens);
-        console.log(firmDate);
-        console.log(dueDate);
-        console.log(customerName);
-        console.log(description);
+
+        const newJobData = {
+
+            jobNumber: jobNumber,
+            screens: screens,
+            firmDate: firmDate,
+            dueDate: dueDate,
+            customerName: customerName,
+            description: description
+        }
+        submitJob(newJobData)
+        
     }
     
 
@@ -41,10 +48,7 @@ function AddJob(){
                     </Col>
                     <Col sm={3}>
                         <label> Is the Due Date Frim? </label> 
-                        <Form.Select aria-label="Choose Firm Date" value={firmDate} onChange={(event) => setFirmDate(event.target.value)}>
-                            <option value={true}> Yes </option> 
-                            <option value={false}> No </option> 
-                        </Form.Select>
+                        <Form.Control value={firmDate} onChange={(event) => setFirmDate(event.target.value)}/>
                     </Col>
                     <Col sm={3}>
                         <label> Due Date </label>

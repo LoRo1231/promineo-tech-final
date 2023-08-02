@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 
-function JobDisplay() {
+function JobDisplay({ jobList }) {
     return(
         <div>
             <div className='heading h2 p-3'> Screen Printing Schedule </div>
@@ -25,15 +25,17 @@ function JobDisplay() {
                     </Row>
                 </thead>
                 <tbody className='dflex align-items-center'>
-                    <Row>
-                        <Col sm={1}> 423667 </Col>
-                        <Col sm={3}> Holley </Col>
-                        <Col sm={4}> Hoodies </Col>
-                        <Col sm={1}> 1/3 </Col>
-                        <Col sm={1}> Yes </Col>
-                        <Col sm={1}> 7/31/23 </Col>
-                        <Col sm={1}> <Button variant='danger'> Delete </Button> </Col>
-                    </Row>
+                    {jobList.map(job => 
+                        <Row>
+                            <Col sm={1}> {job.jobNumber} </Col>
+                            <Col sm={3}> {job.customerName} </Col>
+                            <Col sm={4}> {job.description} </Col>
+                            <Col sm={1}> {job.screens} </Col>
+                            <Col sm={1}> {job.firmDate} </Col>
+                            <Col sm={1}> {job.dueDate} </Col>
+                            <Col sm={1}> <Button variant='danger'> Delete </Button> </Col>
+
+                        </Row>)}
                 </tbody>
             </Table>
         </Container>
