@@ -6,7 +6,8 @@ import { Container } from 'react-bootstrap';
 import AddJob from './components/add-job-form';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import { jobToDelete } from './components/service';
+import AddSuccess from './components/success';
 
 
 
@@ -22,11 +23,20 @@ function App() {
       setJobList(data)
     }
     asyncFunction()
-  })
+  }, [])
 
   const submitJob = (newJobData) => {
     setJobList([...jobList, newJobData])
   }
+
+  const deleteJob = (idToDelete) => {
+    jobToDelete(idToDelete)
+
+    setJobList(jobList.filter(job => job.id !== idToDelete))
+
+  }
+
+
 
   return (
     <div>
@@ -34,7 +44,7 @@ function App() {
       <Container>
         <Routes>
           <Route path="/addjob" element={<AddJob submitJob={submitJob}/>}/>
-          <Route path="/" element={<JobDisplay jobList={jobList}/>}/>
+          <Route path="/" element={<JobDisplay jobList={jobList} deleteJob={deleteJob}/>}/>
         </Routes>
       </Container>
     </div>

@@ -4,13 +4,14 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
-import JobDisplay from './job-display';
+import AddSuccess from './success';
+
 
 function AddJob({ submitJob }){
 
     const [jobNumber, setJobNumber] = useState('');
     const [screens, setScreens] = useState('');
-    const [firmDate, setFirmDate] = useState('');
+    const [firmDate, setFirmDate] = useState('No');
     const [dueDate, setDueDate] = useState('');
     const [customerName, setCustomerName] = useState('');
     const [description, setDescription] = useState('');
@@ -19,6 +20,8 @@ function AddJob({ submitJob }){
         event.preventDefault();
 
         console.log("button was clicked");
+
+        <AddSuccess/>
 
         const newJobData = {
 
@@ -30,10 +33,17 @@ function AddJob({ submitJob }){
             description: description
         }
         submitJob(newJobData)
-        
-    }
-    
 
+        setJobNumber('');
+        setScreens('');
+        setFirmDate('No');
+        setDueDate('');
+        setCustomerName('');
+        setDescription('');
+
+    }
+
+    
     return(
         <div>
             <Form className='mt-3'>
